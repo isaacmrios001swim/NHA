@@ -322,6 +322,14 @@ ul li { margin-bottom: 4px; }
   margin-top: 18px;
 }
 
+/* Single centered card (e.g. when only one card is in a row) */
+.cards-single {
+  grid-template-columns: 1fr;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ---------- Deals & rewards ---------- */
 .section-deals {
   position: relative;
@@ -407,10 +415,11 @@ ul li { margin-bottom: 4px; }
 }
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr;
+  grid-template-columns: 1.4fr 1fr 1fr;
   gap: 40px;
   align-items: start;
 }
+.footer-handle { color: var(--orange); font-weight: 500; }
 .footer .brand { color: #fff; }
 .footer .logo-nh { color: var(--orange); }
 .footer .brand-name { color: #fff; }
