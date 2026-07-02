@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body>
 
@@ -152,15 +152,6 @@
         </label>
 
         <label class="form-field">
-          <span>Location preference</span>
-          <select name="location">
-            <option value="Mobile — you come to us">Mobile — you come to us</option>
-            <option value="Wilson High School pool">Wilson High School pool</option>
-            <option value="Either works">Either works</option>
-          </select>
-        </label>
-
-        <label class="form-field">
           <span>Anything else we should know?</span>
           <textarea name="notes" rows="3" placeholder="Swim experience, goals, special considerations, questions…"></textarea>
         </label>
@@ -224,7 +215,6 @@
         var swimmers = (d.get("swimmers") || "").trim();
         var dates = (d.get("dates") || "").trim();
         var times = (d.get("times") || "").trim();
-        var location = (d.get("location") || "").trim();
         var notes = (d.get("notes") || "").trim();
 
         var subject = "Lesson scheduling request" + (name ? " — " + name : "");
@@ -239,7 +229,6 @@
           "",
           "Number of lessons: " + lessonCount,
           "Swimmer(s) & age(s): " + swimmers,
-          "Location: " + location,
           "",
           "Preferred dates:",
           dates,
