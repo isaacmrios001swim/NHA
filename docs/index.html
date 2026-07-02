@@ -104,22 +104,76 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- CONTACT + SCHEDULE -->
   <section class="section section-soft" id="contact">
     <div class="container container-narrow">
       <div class="section-head">
         <span class="eyebrow">Set up lessons</span>
-        <h2>Get in touch to book.</h2>
-        <p class="lead">Call or email and we'll help you pick the right program, find a time that works, and get your swimmer in the water.</p>
+        <h2>Get in touch to book</h2>
+        <p class="lead">Fill out the form and we'll open your email with everything pre-filled — just hit send and we'll follow up.</p>
       </div>
 
-      <div class="cards">
-        <div class="card card-center">
-          <h3>Contact information</h3>
-          <div class="contact-actions">
-            <a class="btn btn-primary" href="mailto:newheightsaquatics@gmail.com">newheightsaquatics@gmail.com</a>
-            <a class="btn btn-primary" href="tel:+16262778767">(626) 277-8767</a>
-          </div>
+      <form class="schedule-form" id="scheduleForm" novalidate>
+        <div class="form-row">
+          <label class="form-field">
+            <span>Your name</span>
+            <input type="text" name="name" required placeholder="Parent or guardian name" />
+          </label>
+          <label class="form-field">
+            <span>Email</span>
+            <input type="email" name="email" required placeholder="you@example.com" />
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label class="form-field">
+            <span>Phone</span>
+            <input type="tel" name="phone" placeholder="(555) 123-4567" />
+          </label>
+          <label class="form-field">
+            <span>Number of lessons</span>
+            <input type="text" name="lessonCount" required placeholder="e.g. 8 lessons" />
+          </label>
+        </div>
+
+        <label class="form-field">
+          <span>Swimmer name(s) &amp; age(s)</span>
+          <input type="text" name="swimmers" required placeholder="e.g. Emma (6), Liam (9)" />
+        </label>
+
+        <label class="form-field">
+          <span>Preferred dates</span>
+          <textarea name="dates" required rows="2" placeholder="e.g. Weekdays after July 15, Saturday mornings"></textarea>
+        </label>
+
+        <label class="form-field">
+          <span>Preferred times</span>
+          <textarea name="times" required rows="2" placeholder="e.g. 4–6 PM weekdays, 9–11 AM weekends"></textarea>
+        </label>
+
+        <label class="form-field">
+          <span>Location preference</span>
+          <select name="location">
+            <option value="Mobile — you come to us">Mobile — you come to us</option>
+            <option value="Wilson High School pool">Wilson High School pool</option>
+            <option value="Either works">Either works</option>
+          </select>
+        </label>
+
+        <label class="form-field">
+          <span>Anything else we should know?</span>
+          <textarea name="notes" rows="3" placeholder="Swim experience, goals, special considerations, questions…"></textarea>
+        </label>
+
+        <button type="submit" class="btn btn-primary form-submit">Open email &amp; send request</button>
+        <p class="form-note">This opens your email app with the request pre-filled to <strong>newheightsaquatics@gmail.com</strong>. You still need to hit "Send" in your email app to submit it.</p>
+      </form>
+
+      <div class="contact-direct">
+        <p class="contact-direct-label">Or reach us directly</p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:newheightsaquatics@gmail.com">newheightsaquatics@gmail.com</a>
+          <a class="btn btn-primary" href="tel:+16262778767">(626) 277-8767</a>
         </div>
       </div>
     </div>
@@ -155,6 +209,58 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var form = document.getElementById("scheduleForm");
+      if (!form) return;
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var d = new FormData(form);
+        var name = (d.get("name") || "").trim();
+        var email = (d.get("email") || "").trim();
+        var phone = (d.get("phone") || "").trim();
+        var lessonCount = (d.get("lessonCount") || "").trim();
+        var swimmers = (d.get("swimmers") || "").trim();
+        var dates = (d.get("dates") || "").trim();
+        var times = (d.get("times") || "").trim();
+        var location = (d.get("location") || "").trim();
+        var notes = (d.get("notes") || "").trim();
+
+        var subject = "Lesson scheduling request" + (name ? " — " + name : "");
+        var lines = [
+          "Hi New Heights Aquatics,",
+          "",
+          "I'd like to schedule swim lessons. Here are the details:",
+          "",
+          "Name: " + name,
+          "Email: " + email,
+          "Phone: " + phone,
+          "",
+          "Number of lessons: " + lessonCount,
+          "Swimmer(s) & age(s): " + swimmers,
+          "Location: " + location,
+          "",
+          "Preferred dates:",
+          dates,
+          "",
+          "Preferred times:",
+          times,
+          "",
+          "Additional notes:",
+          notes || "(none)",
+          "",
+          "Thanks!",
+          name
+        ];
+        var body = lines.join("\n");
+        var mailto = "mailto:newheightsaquatics@gmail.com" +
+          "?subject=" + encodeURIComponent(subject) +
+          "&body=" + encodeURIComponent(body);
+        window.location.href = mailto;
+      });
+    })();
+  </script>
 
 </body>
 </html>

@@ -330,6 +330,106 @@ ul li { margin-bottom: 4px; }
   margin-right: auto;
 }
 
+/* ---------- Schedule form ---------- */
+.schedule-form {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 560px) {
+  .form-row { grid-template-columns: 1fr; }
+  .schedule-form { padding: 22px; }
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-field > span {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+}
+.form-field input,
+.form-field textarea,
+.form-field select {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 14px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  width: 100%;
+}
+.form-field textarea {
+  resize: vertical;
+  min-height: 60px;
+  line-height: 1.4;
+}
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(245, 130, 32, 0.15);
+}
+.form-submit {
+  align-self: flex-start;
+  margin-top: 8px;
+  cursor: pointer;
+  border: none;
+}
+.form-note {
+  font-size: 0.85rem;
+  color: var(--mute);
+  margin: 4px 0 0;
+  line-height: 1.45;
+}
+
+/* "Or reach us directly" block below the form */
+.contact-direct {
+  margin-top: 32px;
+  text-align: center;
+}
+.contact-direct-label {
+  display: inline-block;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin: 0 0 14px;
+  position: relative;
+  padding: 0 12px;
+}
+.contact-direct-label::before,
+.contact-direct-label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 1px;
+  background: var(--line);
+}
+.contact-direct-label::before { right: 100%; }
+.contact-direct-label::after { left: 100%; }
+.contact-direct .contact-actions { margin-top: 0; }
+
 /* ---------- Deals & rewards ---------- */
 .section-deals {
   position: relative;
@@ -337,7 +437,25 @@ ul li { margin-bottom: 4px; }
   padding-bottom: 40px;
 }
 #private { padding-bottom: 40px; }
-#contact { padding-top: 32px; }
+#contact {
+  padding-top: 32px;
+  padding-bottom: 120px;
+  position: relative;
+}
+/* Wave dipping from the soft contact background into the navy footer */
+#contact::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 80px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 110' preserveAspectRatio='none'><path fill='%23f6f9fc' d='M0,0 L1440,0 L1440,25 C1260,105 900,5 720,40 C540,95 180,5 0,25 Z'/></svg>");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 2;
+}
 
 .deals-grid {
   display: grid;
@@ -411,7 +529,9 @@ ul li { margin-bottom: 4px; }
 .footer {
   background: var(--navy);
   color: rgba(255, 255, 255, 0.85);
-  padding: 60px 0 50px;
+  padding: 130px 0 50px;
+  position: relative;
+  z-index: 1;
 }
 .footer-grid {
   display: grid;
